@@ -19,3 +19,23 @@ long int HashTable::hashing(string key) {
     }
     return hash_key % TABLE_SIZE;
 }
+
+void HashTable::insert(string key, string value) {
+    long int hash_key = hashing(key);
+
+    Node* previous = NULL;
+    Node* start = table[hash_key];
+    while(start != NULL) {
+        previous = start;
+        start = start->next;
+    }
+    if (start == NULL) {
+        start = new Node(key, value);
+        if (previous == NULL) {
+            table[hash_key] = start;
+        }
+        else {
+            previous->next = start;
+        }
+    }
+}
