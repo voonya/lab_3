@@ -23,7 +23,7 @@ private:
 public:
     HashTable();
     ~HashTable();
-    int hashing(string key);
+    long int hashing(string key);
     void insert(string key, string value);
     string search(string key);
 };
