@@ -37,3 +37,4 @@ void work_loop(HashTable table, string key);
 string get_working_dir();
 void parse_file(string path, HashTable& table);
 definition parse_line(string line);
+int input_sentence(string words[]);

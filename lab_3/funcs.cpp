@@ -1,4 +1,6 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Header.h"
+
 
 
 definition parse_line(string line) {
@@ -25,4 +27,25 @@ void parse_file(string path, HashTable& table) {
 		}
 	}
 	dict.close();
+}
+
+
+
+
+int input_sentence(string words[]) {
+	char line[150];
+	cout << "Input your sentence or word: ";
+	cin.getline(line,150);
+
+	char sep[] = ".,;!?- ";
+
+	int count_words = 0;
+	char* pos = strtok(line, sep);
+
+	while (pos != NULL) {
+		char word_c[100];
+		words[count_words++] = pos;
+		pos = strtok(NULL, sep);
+	}
+	return count_words;
 }
