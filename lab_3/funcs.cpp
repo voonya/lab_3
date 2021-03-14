@@ -13,3 +13,16 @@ definition parse_line(string line) {
 string get_working_dir() {
 	return fs::current_path().string();
 }
+
+void parse_file(string path, HashTable& table) {
+	ifstream dict(path);
+	if (dict.is_open()) {
+		while (!dict.eof()) {
+			string line;
+			getline(dict, line);
+			definition item_table = parse_line(line);
+			table.insert(item_table.key, item_table.value);
+		}
+	}
+	dict.close();
+}
