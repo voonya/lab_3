@@ -39,3 +39,15 @@ void HashTable::insert(string key, string value) {
         }
     }
 }
+
+string HashTable::search(string key) {
+    long int hash_key = hashing(key);
+    Node* start = table[hash_key];
+    while(start != NULL) {
+        if (start->key == key) {
+            return start->value;
+        }
+        start = start->next;
+    }
+    return "";
+}
