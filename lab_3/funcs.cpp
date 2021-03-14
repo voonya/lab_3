@@ -9,3 +9,7 @@ definition parse_line(string line) {
 	curr.value = def;
 	return curr;
 }
+
+string get_working_dir() {
+	return fs::current_path().string();
+}
