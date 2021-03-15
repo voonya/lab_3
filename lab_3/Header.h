@@ -31,8 +31,11 @@ struct definition {
     string value;
 };
 
-void work_loop(HashTable table);
+void work_loop(HashTable);
 string get_working_dir();
 void parse_file(string path, HashTable& table);
 definition parse_line(string line);
 int input_sentence(string words[]);
+string str_to_upper(string str);
+
+

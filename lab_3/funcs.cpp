@@ -29,11 +29,18 @@ void parse_file(string path, HashTable& table) {
 	dict.close();
 }
 
+string str_to_upper(string str) {
+	string str_copy = str;
+	for (int i = 0; i < str_copy.length(); i++) {
+		if (islower(str_copy[i])) str_copy[i] = toupper(str_copy[i]);
+	}
+	return str_copy;
+}
 
 int input_sentence(string words[]) {
 	char line[150];
 	cout << "Input your sentence or word: ";
-	cin.getline(line,150);
+	cin.getline(line, 150);
 
 	char sep[] = ".,;!?- ";
 
@@ -42,17 +49,17 @@ int input_sentence(string words[]) {
 
 	while (pos != NULL) {
 		char word_c[100];
-		words[count_words++] = pos;
+		words[count_words++] = str_to_upper(pos);
 		pos = strtok(NULL, sep);
 	}
 	return count_words;
 }
 
 
-void working_loop(HashTable table) {
+void work_loop(HashTable table) {
 	string res_of_search,
 		temp_def;
-	string* words;
+	string words[50];
 	cout << "If you want to exit make empty request" << endl;
 
 	while (true) {
@@ -61,12 +68,12 @@ void working_loop(HashTable table) {
 			exit(1);
 
 		for (int i = 0; i < number_of_words; i++) {
-			temp_def = search(words[i]);
+			temp_def = table.search(words[i]);
 			if (temp_def == "") {
 				cout << "No matches for key " << words[i] << endl;
 			}
 			else {
-				cout << words[i] << "definition:" << endl;
+				cout << words[i] << " definition:" << endl;
 				cout << temp_def << endl;
 			}
 		}
