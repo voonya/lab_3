@@ -18,10 +18,10 @@
     <ClCompile Include="lab_3.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="funcs.cpp">
+    <ClCompile Include="Classes.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Classes.cpp">
+    <ClCompile Include="funcs.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
