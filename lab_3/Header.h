@@ -2,7 +2,6 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
-#include <math.h>
 namespace fs = std::filesystem;
 using namespace std;
 
@@ -32,7 +31,7 @@ struct definition {
     string value;
 };
 
-void work_loop(HashTable table, string key);
+void work_loop(HashTable table);
 string get_working_dir();
 void parse_file(string path, HashTable& table);
 definition parse_line(string line);

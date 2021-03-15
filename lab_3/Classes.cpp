@@ -15,7 +15,7 @@ HashTable::HashTable() {
 long int HashTable::hashing(string key) {
     long int hash_key = 0;
     for (size_t i = 0; i < key.length(); i++) {
-        hash_key += i * key[i];
+        hash_key += i * int(key[i]);
     }
     return hash_key % TABLE_SIZE;
 }
