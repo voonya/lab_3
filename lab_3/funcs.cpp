@@ -26,3 +26,31 @@ void parse_file(string path, HashTable& table) {
 	}
 	dict.close();
 }
+
+
+void working_loop(HashTable table) {
+	string res_of_search,
+		sentence,
+		temp_def;
+	string* words;
+	cout << "If you want to finish searching make empty request" << endl;
+
+	while (true) {
+		cout << "Insert the sentence: ";
+		getline(cin, sentence);
+		if (sentence == "")
+			exit(1)
+			int number_of_words = into_words(sentence, words);
+
+		for (int i = 0; i < numbre_of_words; i++) {
+			temp_def = search(words[i]);
+			if (temp_def == "") {
+				cout << "No matches for key " << words[i] << endl;
+			}
+			else {
+				cout << words[i] << "definition:" << endl;
+				cout << temp_def << endl;
+			}
+		}
+	}
+}
