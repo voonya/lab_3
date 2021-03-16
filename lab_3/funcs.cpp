@@ -75,7 +75,7 @@ void work_loop(HashTable table) {
 			}
 			else {
 				cout << words[i] << " definition:" << endl;
-				cout << temp_def << endl;
+				cout << temp_def << "\n\n";
 			}
 		}
 	}

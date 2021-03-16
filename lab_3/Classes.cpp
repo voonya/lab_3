@@ -12,19 +12,18 @@ HashTable::HashTable() {
         table[i] = NULL;
 }
 
-unsigned long HashTable::hashing(string key) {
-    unsigned long hash_key = 0;
-    for (size_t i = 0; i < key.length(); i++) {
-        hash_key += hash_key * 33 ^ key[i];
-    }
-    return hash_key % TABLE_SIZE;
+long int HashTable::hashing(string key) {
+    unsigned long int hash = 0;
+    for (int i = 0; i < key.length(); i++)
+        hash = (31 * hash + key[i]) % TABLE_SIZE;
+    return hash;
 }
 
 void HashTable::insert(string key, string value) {
-    unsigned long hash_key = hashing(key);
-
+    long int hash_key = hashing(key);
     Node* previous = NULL;
     Node* start = table[hash_key];
+    if (start == NULL) loads++;
     while(start != NULL) {
         previous = start;
         start = start->next;
@@ -38,6 +37,8 @@ void HashTable::insert(string key, string value) {
             previous->next = start;
         }
     }
+    
+    if (loads >= MAX_SIZE) resize();
 }
 
 string HashTable::search(string key) {
@@ -50,6 +51,34 @@ string HashTable::search(string key) {
         start = start->next;
     }
     return "";
+}
+/*int HashTable::analyze() {
+    int c = 0;
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        if (table[i] == NULL) c++;
+    }
+    return c;
+}*/
+
+void HashTable::resize() {
+    int old_size = TABLE_SIZE;
+    TABLE_SIZE *= 2;
+    MAX_SIZE = TABLE_SIZE * 0.8;
+    Node** old_table = table;
+    Node** new_table = new Node * [TABLE_SIZE];
+    table = new_table;
+    loads = 0;
+    for (int i = 0; i < TABLE_SIZE; i++) table[i] = NULL;
+    for (int i = 0; i < old_size; i++) {
+        if (old_table[i] != NULL) {
+            Node* start = old_table[i];
+            while (start != NULL){
+                insert(start->key, start->value);
+                start = start->next;
+            }
+        }
+    }
+    delete[] old_table;
 }
 
 void HashTable::show_table() {

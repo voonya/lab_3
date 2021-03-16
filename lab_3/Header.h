@@ -10,21 +10,24 @@ public:
     string key;
     string value;
     Node* next;
-
     Node(string key, string value);
 };
 
 class HashTable {
 private:
     int TABLE_SIZE = 1000;
+    int loads = 0;
+    int MAX_SIZE = TABLE_SIZE * 0.8;
     Node** table;
-
+    void resize();
 public:
     HashTable();
     unsigned long hashing(string key);
     void insert(string key, string value);
     string search(string key);
     void show_table();
+    int get_size() { return TABLE_SIZE; };
+    //int analyze();
 };
 
 struct definition {
