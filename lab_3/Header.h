@@ -27,6 +27,7 @@ public:
     string search(string key);
     void show_table();
     int get_size() { return TABLE_SIZE; };
+    //int analyze();
 };
 
 struct definition {

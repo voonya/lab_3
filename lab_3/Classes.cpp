@@ -23,12 +23,12 @@ void HashTable::insert(string key, string value) {
     long int hash_key = hashing(key);
     Node* previous = NULL;
     Node* start = table[hash_key];
+    if (start == NULL) loads++;
     while(start != NULL) {
         previous = start;
         start = start->next;
     }
     if (start == NULL) {
-        loads++;
         start = new Node(key, value);
         if (previous == NULL) {
             table[hash_key] = start;
@@ -52,6 +52,13 @@ string HashTable::search(string key) {
     }
     return "";
 }
+/*int HashTable::analyze() {
+    int c = 0;
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        if (table[i] == NULL) c++;
+    }
+    return c;
+}*/
 
 void HashTable::resize() {
     int old_size = TABLE_SIZE;
