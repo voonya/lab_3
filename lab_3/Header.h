@@ -21,9 +21,10 @@ private:
 
 public:
     HashTable();
-    long int hashing(string key);
+    unsigned long hashing(string key);
     void insert(string key, string value);
     string search(string key);
+    void show_table();
 };
 
 struct definition {

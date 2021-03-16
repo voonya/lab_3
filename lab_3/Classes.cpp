@@ -12,16 +12,16 @@ HashTable::HashTable() {
         table[i] = NULL;
 }
 
-long int HashTable::hashing(string key) {
-    long int hash_key = 0;
+unsigned long HashTable::hashing(string key) {
+    unsigned long hash_key = 0;
     for (size_t i = 0; i < key.length(); i++) {
-        hash_key += i * int(key[i]);
+        hash_key += hash_key * 33 ^ key[i];
     }
     return hash_key % TABLE_SIZE;
 }
 
 void HashTable::insert(string key, string value) {
-    long int hash_key = hashing(key);
+    unsigned long hash_key = hashing(key);
 
     Node* previous = NULL;
     Node* start = table[hash_key];
@@ -41,7 +41,7 @@ void HashTable::insert(string key, string value) {
 }
 
 string HashTable::search(string key) {
-    long int hash_key = hashing(key);
+    unsigned long hash_key = hashing(key);
     Node* start = table[hash_key];
     while(start != NULL) {
         if (start->key == key) {
@@ -50,4 +50,23 @@ string HashTable::search(string key) {
         start = start->next;
     }
     return "";
+}
+
+void HashTable::show_table() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        cout << i << " ";
+        if (table[i] == NULL)
+            cout << "NULL" << endl;
+        else {
+            Node* previous = NULL;
+            Node* start = table[i];
+            while (start != NULL)
+            {
+                previous = start;
+                start = start->next;
+                cout << " ---> " << previous->key;
+            }
+            cout << endl;
+        }
+    }
 }

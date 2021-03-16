@@ -2,30 +2,6 @@
 #include "Header.h"
 
 
-void working_loop(HashTable table) {
-	string res_of_search,
-		temp_def;
-	string* words;
-	cout << "If you want to exit make empty request" << endl;
-
-	while (true) {
-		int number_of_words = input_sentence(words);
-		if (number_of_words == 0)
-			exit(1);
-
-		for (int i = 0; i < number_of_words; i++) {
-			temp_def = search(words[i]);
-			if (temp_def == "") {
-				cout << "No matches for key " << words[i] << endl;
-			}
-			else {
-				cout << words[i] << "definition:" << endl;
-				cout << temp_def << endl;
-			}
-		}
-	}
-}
-
 definition parse_line(string line) {
 	definition curr;
 	string word = line.substr(0, line.find(";"));
