@@ -26,6 +26,8 @@ public:
     long int hashing(string key);
     void insert(string key, string value);
     string search(string key);
+    void show_table();
+    int get_size() { return TABLE_SIZE; };
 };
 
 struct definition {
