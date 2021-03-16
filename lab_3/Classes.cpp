@@ -11,8 +11,20 @@ HashTable::HashTable() {
     for (int i = 0; i < TABLE_SIZE; i++)
         table[i] = NULL;
 }
+HashTable::~HashTable() {
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        Node* start = table[i];
 
-long int HashTable::hashing(string key) {
+        while (start != NULL) {
+            Node* previous = start;
+            start = start->next;
+            delete previous;
+        }
+    }
+    delete[] table;
+}
+
+unsigned long HashTable::hashing(string key) {
     unsigned long int hash = 0;
     for (int i = 0; i < key.length(); i++)
         hash = (31 * hash + key[i]) % TABLE_SIZE;
@@ -73,8 +85,10 @@ void HashTable::resize() {
         if (old_table[i] != NULL) {
             Node* start = old_table[i];
             while (start != NULL){
+                Node* previous = start;
                 insert(start->key, start->value);
                 start = start->next;
+                delete previous;
             }
         }
     }

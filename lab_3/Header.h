@@ -22,6 +22,7 @@ private:
     void resize();
 public:
     HashTable();
+    ~HashTable();
     unsigned long hashing(string key);
     void insert(string key, string value);
     string search(string key);
