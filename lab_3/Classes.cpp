@@ -21,7 +21,6 @@ long int HashTable::hashing(string key) {
 
 void HashTable::insert(string key, string value) {
     long int hash_key = hashing(key);
-
     Node* previous = NULL;
     Node* start = table[hash_key];
     while(start != NULL) {
