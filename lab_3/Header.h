@@ -10,7 +10,6 @@ public:
     string key;
     string value;
     Node* next;
-
     Node(string key, string value);
 };
 
