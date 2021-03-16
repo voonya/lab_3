@@ -17,7 +17,7 @@ public:
 class HashTable {
 private:
     int TABLE_SIZE = 1000;
-    int count_elem = 0;
+    int loads = 0;
     int MAX_SIZE = TABLE_SIZE * 0.8;
     Node** table;
     void resize();

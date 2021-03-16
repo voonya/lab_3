@@ -30,6 +30,7 @@ void HashTable::insert(string key, string value) {
         start = start->next;
     }
     if (start == NULL) {
+        loads++;
         start = new Node(key, value);
         if (previous == NULL) {
             table[hash_key] = start;
@@ -38,8 +39,8 @@ void HashTable::insert(string key, string value) {
             previous->next = start;
         }
     }
-    count_elem++;
-    if (count_elem >= MAX_SIZE) resize();
+    
+    if (loads >= MAX_SIZE) resize();
 }
 
 string HashTable::search(string key) {
@@ -55,18 +56,19 @@ string HashTable::search(string key) {
 }
 
 void HashTable::resize() {
-    cout << count_elem << " " << TABLE_SIZE << " " << MAX_SIZE << " resizing" << endl;
+    cout << loads << " " << TABLE_SIZE << " " << MAX_SIZE << " resizing" << endl;
     int old_size = TABLE_SIZE;
     TABLE_SIZE *= 2;
     MAX_SIZE = TABLE_SIZE * 0.8;
     Node** old_table = table;
     Node** new_table = new Node * [TABLE_SIZE];
     table = new_table;
+    loads = 0;
     for (int i = 0; i < TABLE_SIZE; i++) table[i] = NULL;
     for (int i = 0; i < old_size; i++) {
         if (old_table[i] != NULL) {
             Node* start = old_table[i];
-            while (start != NULL) {
+            while (start != NULL){
                 insert(start->key, start->value);
                 start = start->next;
             }
