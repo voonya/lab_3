@@ -48,7 +48,6 @@ int input_sentence(string* words) {
 	char* pos = strtok(line, sep);
 
 	while (pos != NULL) {
-		char word_c[100];
 		words[count_words++] = str_to_upper(pos);
 		pos = strtok(NULL, sep);
 	}

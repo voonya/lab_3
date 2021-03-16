@@ -16,7 +16,8 @@ public:
 
 class HashTable {
 private:
-    int TABLE_SIZE = 1000;
+    int table_size = 1000;
+    int load = 0;
     Node** table;
 
 public:
@@ -25,6 +26,7 @@ public:
     void insert(string key, string value);
     string search(string key);
     void show_table();
+    void resize();
 };
 
 struct definition {
