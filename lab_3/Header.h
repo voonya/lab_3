@@ -5,17 +5,68 @@
 namespace fs = std::filesystem;
 using namespace std;
 
+struct list_item {
+	string value;
+	list_item* next;
+};
+
+class linked_list {
+	list_item* start;
+	list_item* end;
+	int count_el = 0;
+	bool empty;
+public:
+	linked_list() {
+		start = NULL;
+		end = NULL;
+		count_el = 0;
+		empty = true;
+	}
+
+	void push_back(string item) {
+		empty = false;
+		list_item* curr = new list_item;
+		curr->value = item;
+		curr->next = NULL;
+		if (start == NULL && end == NULL) {
+			start = curr;
+			end = curr;
+		}
+		else {
+			end->next = curr;
+			end = curr;
+		}
+		count_el++;
+	}
+
+	int size() {
+		return count_el;
+	}
+
+	void show_list() {
+		list_item* ptr = start;
+		for (int i = 0; i < count_el; i++) {
+			cout << ptr->value << "\n\n";
+			ptr = ptr->next;
+		}
+	}
+
+	bool is_empty() {
+		return empty;
+	}
+};
+
 class Node {
 public:
     string key;
-    string value;
+    linked_list value;
     Node* next;
-    Node(string key, string value);
+    Node(string key, linked_list value);
 };
 
 class HashTable {
 private:
-    int TABLE_SIZE = 1000;
+    int TABLE_SIZE = 20;
     int loads = 0;
     int MAX_SIZE = TABLE_SIZE * 0.8;
     Node** table;
@@ -25,10 +76,9 @@ public:
     ~HashTable();
     unsigned long hashing(string key);
     void insert(string key, string value);
-    string search(string key);
+    linked_list search(string key);
     void show_table();
     int get_size() { return TABLE_SIZE; };
-    //int analyze();
 };
 
 struct definition {

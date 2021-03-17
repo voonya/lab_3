@@ -58,8 +58,7 @@ int input_sentence(string* words) {
 
 
 void work_loop(HashTable table) {
-	string res_of_search,
-		temp_def;
+	linked_list temp_def;
 	string words[50];
 	cout << "If you want to exit make empty request" << endl;
 
@@ -70,12 +69,15 @@ void work_loop(HashTable table) {
 
 		for (int i = 0; i < number_of_words; i++) {
 			temp_def = table.search(words[i]);
-			if (temp_def == "") {
+			if (temp_def.size() == 0) {
 				cout << "No matches for key " << words[i] << endl;
 			}
 			else {
 				cout << words[i] << " definition:" << endl;
-				cout << temp_def << "\n\n";
+				temp_def.show_list();
+
+				
+				
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 #include "Header.h"
 
-Node::Node(string key, string value) {
+Node::Node(string key, linked_list value) {
     this->key = key;
     this->value = value;
     this->next = NULL;
@@ -36,12 +36,20 @@ void HashTable::insert(string key, string value) {
     Node* previous = NULL;
     Node* start = table[hash_key];
     if (start == NULL) loads++;
+    bool flag = false;
     while(start != NULL) {
+        if (start->key == key) {
+            start->value.push_back(value);
+            flag = true;
+            break;
+        }
         previous = start;
         start = start->next;
     }
-    if (start == NULL) {
-        start = new Node(key, value);
+    if (start == NULL && !flag) {
+        linked_list list;
+        list.push_back(value);
+        start = new Node(key, list);
         if (previous == NULL) {
             table[hash_key] = start;
         }
@@ -50,10 +58,10 @@ void HashTable::insert(string key, string value) {
         }
     }
     
-    if (loads >= MAX_SIZE) resize();
+    //if (loads >= MAX_SIZE) resize();
 }
 
-string HashTable::search(string key) {
+linked_list HashTable::search(string key) {
     unsigned long hash_key = hashing(key);
     Node* start = table[hash_key];
     while(start != NULL) {
@@ -62,16 +70,10 @@ string HashTable::search(string key) {
         }
         start = start->next;
     }
-    return "";
+    return {};
 }
-/*int HashTable::analyze() {
-    int c = 0;
-    for (int i = 0; i < TABLE_SIZE; i++) {
-        if (table[i] == NULL) c++;
-    }
-    return c;
-}*/
 
+/*
 void HashTable::resize() {
     int old_size = TABLE_SIZE;
     TABLE_SIZE *= 2;
@@ -94,7 +96,7 @@ void HashTable::resize() {
     }
     delete[] old_table;
 }
-
+*/
 void HashTable::show_table() {
     for (int i = 0; i < TABLE_SIZE; i++) {
         cout << i << " ";
