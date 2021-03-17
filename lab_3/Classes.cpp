@@ -73,7 +73,7 @@ linked_list HashTable::search(string key) {
     return {};
 }
 
-
+/*
 void HashTable::resize() {
     int old_size = TABLE_SIZE;
     TABLE_SIZE *= 2;
@@ -96,7 +96,7 @@ void HashTable::resize() {
     }
     delete[] old_table;
 }
-
+*/
 void HashTable::show_table() {
     for (int i = 0; i < TABLE_SIZE; i++) {
         cout << i << " ";
